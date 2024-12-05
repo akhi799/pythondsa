@@ -1,0 +1,16 @@
+
+class Solution:
+    def transpose(self, matrix: List[List[int]]) -> List[List[int]]:
+        # Get the number of rows and columns
+        a = len(matrix)  # Number of rows
+        b = len(matrix[0])  # Number of columns
+        
+        # Initialize the transposed matrix with the correct dimensions
+        ans = [[0] * a for _ in range(b)]  # Create b rows each with a columns
+        
+        # Loop through each element and assign it to the correct position in the transposed matrix
+        for i in range(a):
+            for j in range(b):
+                ans[j][i] = matrix[i][j]  # Transpose element
+        
+        return ans  # Return the transposed matrix
