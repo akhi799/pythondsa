@@ -1,0 +1,15 @@
+#3033. Modify the Matrix
+
+class Solution:
+    def modifiedMatrix(self, matrix: List[List[int]]) -> List[List[int]]:
+        answer=matrix
+        for i in range(len(matrix[0])):
+            maximum=-2
+            for j in range(len(matrix)):
+                maximum=max(maximum,matrix[j][i])
+            for j in range(len(matrix)):
+                if answer[j][i]==-1:
+                    answer[j][i]=maximum
+        return answer
+            
+                
