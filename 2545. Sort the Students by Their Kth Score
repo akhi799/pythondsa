@@ -1,0 +1,14 @@
+class Solution:
+    def sortTheStudents(self, score: List[List[int]], k: int) -> List[List[int]]:
+        for i  in range(len(score)):
+            m=0
+            index=0
+            for j  in  range(i,len(score)):
+                m=max(m,score[j][k])
+                if score[j][k]==m:
+                    index=j
+            score[i],score[index]=score[index]  ,score[i]
+        return score
+
+
+                
