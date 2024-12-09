@@ -1,0 +1,17 @@
+
+class Solution:
+    def timeRequiredToBuy(self, tickets: List[int], n: int) -> int:
+        q = deque(enumerate(tickets))  # Create a deque with indices
+        time = 0
+        
+        while q:
+            i, ticket = q.popleft()
+            time += 1
+            ticket -= 1
+            if ticket > 0:
+                q.append((i, ticket))  # Only re-append if tickets remain
+            if i == n and ticket == 0:
+                break  # Stop when the specific person is done
+        
+        return time
+
