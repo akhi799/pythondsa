@@ -1,0 +1,107 @@
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        st=[]
+        index=[-1]*len(nums2)
+        # st.append(nums2[len(nums2)-1])
+        for i in range(len(nums2)):
+            while st and nums2[i]>nums2[st[-1]]:
+                index[st.pop()]=nums2[i]
+            st.append(i)
+            
+        for i in range(len(nums1)):
+            nums1[i]=index[nums2.index(nums1[i])]
+        return nums1
+
+
+Second Step: Iterating Through nums2 to Fill the index Array
+The goal of this step is to fill the index array with the next greater element for each element in nums2. We use a stack to keep track of indices of elements for which we haven't found the next greater element yet.
+
+Here’s a detailed explanation with an example:
+
+Initialize: Start with an empty stack st and an index array of the same length as nums2, initialized with -1.
+
+Iterate through nums2:
+
+For each element nums2[i], while the stack is not empty and nums2[i] is greater than the element at the index on top of the stack (nums2[st[-1]]):
+
+Pop the index from the stack.
+
+Update index at the popped index with the current element nums2[i].
+
+Push the current index i onto the stack.
+
+Example
+Let's say nums2 = [2, 1, 2, 4, 3].
+
+Initialize st = [] and index = [-1, -1, -1, -1, -1].
+
+Iteration 1 (i = 0):
+
+nums2[0] = 2
+
+Stack is empty, so push 0 onto the stack.
+
+st = [0]
+
+Iteration 2 (i = 1):
+
+nums2[1] = 1
+
+Stack is not empty, but nums2[1] (1) < nums2[st[-1]] (2), so push 1 onto the stack.
+
+st = [0, 1]
+
+Iteration 3 (i = 2):
+
+nums2[2] = 2
+
+While nums2[2] (2) > nums2[st[-1]] (1), pop from stack and update index at that index.
+
+Pop 1, update index[1] = 2.
+
+index = [-1, 2, -1, -1, -1]
+
+Stack is not empty, but nums2[2] (2) == nums2[st[-1]] (2), so push 2 onto the stack.
+
+st = [0, 2]
+
+Iteration 4 (i = 3):
+
+nums2[3] = 4
+
+While nums2[3] (4) > nums2[st[-1]] (2), pop from stack and update index at that index.
+
+Pop 2, update index[2] = 4.
+
+index = [-1, 2, 4, -1, -1]
+
+While nums2[3] (4) > nums2[st[-1]] (2), pop from stack and update index at that index.
+
+Pop 0, update index[0] = 4.
+
+index = [4, 2, 4, -1, -1]
+
+Stack is empty, so push 3 onto the stack.
+
+st = [3]
+
+Iteration 5 (i = 4):
+
+nums2[4] = 3
+
+Stack is not empty, but nums2[4] (3) < nums2[st[-1]] (4), so push 4 onto the stack.
+
+st = [3, 4]
+
+After iterating through nums2, the index array is [4, 2, 4, -1, -1], which means:
+
+The next greater element for 2 is 4.
+
+The next greater element for 1 is 2.
+
+The next greater element for 2 is 4.
+
+There is no next greater element for 4.
+
+There is no next greater element for 3.
+
