@@ -1,0 +1,43 @@
+class Solution:
+    def maxEvents(self, events: List[List[int]]) -> int:
+        events.sort()
+        minheap=[]
+        day=0
+        event_count=0
+        i=0
+        while i<len(events) or minheap:
+            if not minheap:
+                day=events[i][0]
+
+            while i<len(events) and events[i][0]<=day:
+                heapq.heappush(minheap,events[i][1])
+                i+=1
+
+            heapq.heappop(minheap)
+            event_count+=1
+            day+=1
+
+            while minheap and minheap[0]<day:
+                heapq.heappop(minheap)
+            
+
+
+
+        return event_count
+
+
+
+    def maxEvents(self, A):
+        A.sort(reverse=1)
+        h = []
+        res = d = 0
+        while A or h:
+            if not h: d = A[-1][0]
+            while A and A[-1][0] <= d:
+                heapq.heappush(h, A.pop()[1])
+            heapq.heappop(h)
+            res += 1
+            d += 1
+            while h and h[0] < d:
+                heapq.heappop(h)
+      return res
